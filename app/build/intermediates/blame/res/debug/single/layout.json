@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\Android\\Project\\Wifi_Master_LKY\\app\\build\\intermediates\\res\\merged\\debug\\layout\\single_list.xml",
+        "source": "D:\\Android\\Project\\Wifi_Master_LKY\\app\\src\\main\\res\\layout\\single_list.xml"
+    },
+    {
+        "merged": "D:\\Android\\Project\\Wifi_Master_LKY\\app\\build\\intermediates\\res\\merged\\debug\\layout\\submit_dialog.xml",
+        "source": "D:\\Android\\Project\\Wifi_Master_LKY\\app\\src\\main\\res\\layout\\submit_dialog.xml"
+    },
+    {
+        "merged": "D:\\Android\\Project\\Wifi_Master_LKY\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
+        "source": "D:\\Android\\Project\\Wifi_Master_LKY\\app\\src\\main\\res\\layout\\activity_main.xml"
+    }
+]
