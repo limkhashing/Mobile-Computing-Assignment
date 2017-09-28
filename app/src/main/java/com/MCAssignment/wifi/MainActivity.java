@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
@@ -149,7 +150,7 @@ public class MainActivity extends Activity
 			@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id)
 			{
-				if(PasswordMessage[pos].equals(" ")  || PasswordMessage[pos].equals("No Password Available"))
+				if(PasswordMessage[pos].equals(" ") || PasswordMessage[pos].trim().equals("No Password Available"))
 				{
 					Toast.makeText(MainActivity.this, "No password to copy", Toast.LENGTH_LONG).show();
 				}
@@ -162,7 +163,6 @@ public class MainActivity extends Activity
 				return true;
 			}
 		});
-
 	}
 
 	private void scanning()
@@ -188,6 +188,49 @@ public class MainActivity extends Activity
 	{
 		registerReceiver(receiverWifi, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
 		super.onResume();
+	}
+
+	public void refreshList(View view)
+	{
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
+        if (wifiManager.isWifiEnabled())
+        {
+            if(netInfo != null && netInfo.isConnected() && netInfo.isAvailable()) // if got connection
+            {
+                if(connectToWiFi.getConnectionTimeout() && checkInternetConnection.isConnectionResult())
+                {
+                    MyTask task = new MyTask();
+                    task.execute();
+                }
+                else
+                {
+                    setWifi.setText("Turn Off WiFi");
+                    wifiManager.setWifiEnabled(true);
+                    progressDialog.setMessage("Checking for Wi-Fi connection");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+                    handler.postDelayed(new Runnable() // wait 15 sec
+                    {
+                        public void run()
+                        {
+                            checkInternetConnection.executeCheckInternet();
+                            checkConnectivity();
+                        }
+                    }, 15000);
+                }
+            }
+            else
+            {
+                Toast.makeText(MainActivity.this, "Can't refresh. No internet connection", Toast.LENGTH_LONG).show();
+            }
+        }
+        else
+        {
+            Toast.makeText(MainActivity.this, "Please enable WiFi first", Toast.LENGTH_LONG).show();
+        }
+
 	}
 
 	public void checkConnectivity()
