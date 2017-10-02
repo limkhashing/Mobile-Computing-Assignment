@@ -69,8 +69,8 @@ public class MainActivity extends Activity
 		clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
 		// references to layout
-		listViwProvider = (ListView) findViewById(R.id.list_view_wifi);
-		setWifi = (Button) findViewById(R.id.btn_wifi);
+		listViwProvider = (ListView) findViewById(R.id.listViewWiFi);
+		setWifi = (Button) findViewById(R.id.wifiButton);
 
 		listViwProvider.setVisibility(ListView.GONE);
 
