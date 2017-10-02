@@ -94,7 +94,7 @@ public class ImportDialog
 		{
 			if(hasInternetAccess())
 			{
-				String password = params[0], BSSID = params[1], uri ="https://lkyyuen.com/mc/save";
+				String password = params[0], BSSID = params[1], uri ="https://lkyyuen.com/mc/save.php";
 
 				try {
 					URL url = new URL(uri);

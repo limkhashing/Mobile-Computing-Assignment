@@ -50,7 +50,7 @@ public class MainActivity extends Activity
 	ConnectToWiFi connectToWiFi;
 	String[] PasswordMessage;
 	int count = 0;
-	final String uri = "https://lkyyuen.com/mc/pswd";
+	final String uri = "https://lkyyuen.com/mc/pswd.php";
 	ClipData myClip;
 	ClipboardManager clipboard;
 
