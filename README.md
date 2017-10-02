@@ -10,7 +10,7 @@ This project is for the purpose of Mobile Computing Assignment, an application o
 ### Test Cases
 Situation | Expected output
 ------------ | -------------
-WiFi is enabled / User turn on WiFi | Check internet access and connection timeout
+WiFi is enabled / User turn on WiFi | Check internet access and connection timeout?
 Internet access is available | Fetch data
 No Internet access | Connect to strong public WiFi. Repeat checking
 Still no | Enable Mobile / Cellular Data. Repeat checking
