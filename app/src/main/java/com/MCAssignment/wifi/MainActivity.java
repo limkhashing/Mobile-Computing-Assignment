@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -51,8 +49,6 @@ public class MainActivity extends Activity
 	String[] PasswordMessage;
 	int count = 0;
 	final String uri = "https://lkyyuen.com/mc/pswd.php";
-	ClipData myClip;
-	ClipboardManager clipboard;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -66,7 +62,6 @@ public class MainActivity extends Activity
 		p = new RequestPackage();
 		checkInternetConnection = new CheckInternetConnection(this);
 		connectToWiFi = new ConnectToWiFi(this);
-		clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 
 		// references to layout
 		listViwProvider = (ListView) findViewById(R.id.listViewWiFi);
@@ -152,13 +147,12 @@ public class MainActivity extends Activity
 			{
 				if(PasswordMessage[pos].equals(" ") || PasswordMessage[pos].trim().equals("No Password Available"))
 				{
-					Toast.makeText(MainActivity.this, "No password to copy", Toast.LENGTH_LONG).show();
+					Toast.makeText(MainActivity.this, "No password for this WiFI. Unable to connect", Toast.LENGTH_LONG).show();
 				}
 				else
 				{
-					myClip = ClipData.newPlainText("password", PasswordMessage[pos].trim());
-					Toast.makeText(MainActivity.this, "Copied password", Toast.LENGTH_LONG).show();
-					clipboard.setPrimaryClip(myClip);
+					// connect wifi here
+					connectToWiFi.connectWifi(wifiList ,pos, PasswordMessage[pos].trim(), wifiList.get(pos).BSSID, wifiList.get(pos).SSID);
 				}
 				return true;
 			}
@@ -255,7 +249,7 @@ public class MainActivity extends Activity
 						progressDialog.setMessage("No WiFi Connection. Trying to connect to nearby public WiFi");
 						progressDialog.setCancelable(false);
 						progressDialog.show();
-						connectToWiFi.connectWiFi();
+						connectToWiFi.connectPublicWiFi();
 						count++;
 						checkInternetConnection.executeCheckInternet();
 						connectToWiFi.executeCheckConnectionTimeout();
@@ -273,7 +267,7 @@ public class MainActivity extends Activity
 						// There is no official way to do this. However, it can be achieved unofficially with reflection.
 						// force open data does not work above android 4.4, instead ask the user to enable data
 						try {
-							setMobileDataEnabled(true);
+							setMobileData(true);
 						} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 							e.printStackTrace();
 						} finally {
@@ -318,7 +312,7 @@ public class MainActivity extends Activity
 		}, 10000);
 	}
 
-	private void setMobileDataEnabled(boolean enabled) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException
+	private void setMobileData(boolean enabled) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException
 	{
 		// if enable is false, data is disable
 		final ConnectivityManager conman = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
