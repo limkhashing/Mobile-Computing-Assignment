@@ -120,7 +120,7 @@ public class ConnectToWiFi
         }
     }
 
-    // get the List of WiFi, which position of longClick, password, BSSID, and SSID of that position
+    // get the list of WiFi, which position of longClick, password, BSSID, and SSID of that position
     void connectWifi(List<ScanResult> wifiList, int position, String password, String BSSID, final String SSID)
     {
         progressDialog.setMessage("Connecting to " + SSID + " WiFi");
