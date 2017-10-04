@@ -92,7 +92,7 @@ public class ConnectToWiFi
                 {
                     if(scanResultList.get(i).SSID != null)
                     {
-                        wifi.disconnect(); // disconnect previous connected network
+                        wifi.disconnect(); // disconnect previous connected network if got
                         wifi.enableNetwork(networkId, true);
                         wifi.reconnect();
 
@@ -120,6 +120,7 @@ public class ConnectToWiFi
         }
     }
 
+    // get the List of WiFi, which position of longClick, password, BSSID, and SSID of that position
     void connectWifi(List<ScanResult> wifiList, int position, String password, String BSSID, final String SSID)
     {
         progressDialog.setMessage("Connecting to " + SSID + " WiFi");
@@ -130,12 +131,13 @@ public class ConnectToWiFi
         {
             final WifiConfiguration conf = new WifiConfiguration();
             conf.BSSID = BSSID;
-            conf.SSID = "\"" + SSID + "\"";   // Please note the quotes. String should contain ssid in quotes
+            conf.SSID = "\"" + SSID + "\"";
             conf.status = WifiConfiguration.Status.ENABLED;
             conf.priority = 40;
 
             if (wifiList.get(position).capabilities.toUpperCase().contains("WEP"))
             {
+                // if the security is WEP
                 conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
                 conf.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
                 conf.allowedProtocols.set(WifiConfiguration.Protocol.WPA);
@@ -151,6 +153,7 @@ public class ConnectToWiFi
             }
             else if (wifiList.get(position).capabilities.toUpperCase().contains("WPA"))
             {
+                // if the security is WPA / WPA2
                 conf.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
                 conf.allowedProtocols.set(WifiConfiguration.Protocol.WPA);
                 conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
@@ -172,14 +175,14 @@ public class ConnectToWiFi
                 wifi.disconnect();
                 wifi.enableNetwork(networkID, true);
                 wifi.reconnect();
-                wifi.saveConfiguration();
-                setMobileData(false);
+                wifi.saveConfiguration(); // save the settings of WiFi
+                setMobileData(false); // disable mobile data back
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-       handler.postDelayed(new Runnable()
+       handler.postDelayed(new Runnable() // wait 7 seconds
         {
           public void run()
           {
@@ -212,6 +215,7 @@ public class ConnectToWiFi
 
         public Boolean returnConnectionTimeout()
         {
+            // try connect to Stack Overflow, connection timeout is 15 seconds
             try {
                 HttpURLConnection urlc = (HttpURLConnection) (new URL("https://stackoverflow.com/").openConnection());
                 urlc.setRequestProperty("User-Agent", "Test");
