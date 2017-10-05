@@ -3,7 +3,7 @@ This project is for the purpose of Mobile Computing Assignment, an application o
 
 ## Functionality
 1. Allow people to get(pull) a particular WiFi password from a server, without having to asking people over and over again.
-2. Can update(push) a particular WiFi password to a server, thus sharing the password with other user.
+2. Can update(post) a particular WiFi password to a server, thus sharing the password with other user.
 3. Help people automatically connect to any available and only strong WiFi signal, depending on he or she's location.
 4. To seamlessly switch between Mobile / Cellular Data(2G, 3G, 4G, LTE) and WiFi, forming a single network switch.
 
