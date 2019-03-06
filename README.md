@@ -7,6 +7,8 @@ This project is for the purpose of Mobile Computing Assignment, an application o
 3. Help people automatically connect to any available and only strong WiFi signal, depending on he or she's location.
 4. To seamlessly switch between Mobile / Cellular Data(2G, 3G, 4G, LTE) and WiFi, forming a single network switch.
 
+Video demonstration can be found in https://youtu.be/MDc32ac0FVg
+
 ### Test Cases
 Situation | Expected output
 ------------ | -------------
