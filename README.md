@@ -22,7 +22,7 @@ Failed - Internet access is not possible | Alerting user and get WiFi scan resul
 * [Android Studio](https://developer.android.com/studio/index.html) - The IDE used
 
 ## Authors
-* **Lim Kha Shing** - [kslim888](https://github.com/kslim888)
+* **Lim Kha Shing** - [kslim888](https://www.linkedin.com/in/lim-kha-shing-836a24120/)
 
 ## Acknowledgments
 Special thanks to :
